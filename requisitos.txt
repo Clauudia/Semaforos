@@ -1,0 +1,15 @@
+Implementar en C un semáforo general, en un programa que lo utilice para administrar la
+sincronización de n hilos.
+El programa deberá recibir del usuario el número n de hilos a ejecutar, para luego lanzar n hilos
+iguales que iteren 10 veces, utilizando en cada iteración el semáforo implementado por ustedes
+para administrar la entrada a una sección especial del código, de forma que solo un conjunto
+reducido de hilos puedan ejecutarla a la vez.
+
+La sección especial consistirá en tres pasos:
+*Imprimir en pantalla un mensaje que indique que el hilo entró a la sección e indique el
+identificador único del hilo, así como el valor actual del contador del semáforo.
+*Realizar iterativamente la suma de los primeros mil números naturales (para tardar un poco)
+*Imprimir en pantalla un mensaje que indique que el hilo ha terminado de utilizar la sección
+especial.
+
+El valor inicial del contador del semáforo deberá determinarse por medio de una constante.
