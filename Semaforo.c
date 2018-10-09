@@ -31,6 +31,8 @@ int main(int argc, char *argv[])
 	void omp_set_lock(omp_lock_t *lock);
 	void omp_unset_lock(omp_lock_t *lock);
 
+	omp_lock_t lock;
+
 	//printf("Se lanzarán %d hilos \n",nhilos); 
 
 	#pragma omp parallel private(hilo_id, lock)
