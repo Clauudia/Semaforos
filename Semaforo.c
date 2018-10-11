@@ -1,5 +1,7 @@
 #include <omp.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 //Definimos un tipo booleano 
 typedef int bool;
@@ -7,52 +9,14 @@ typedef int bool;
 #define false 0
 
 //Creamos la cola 
- #define MAX nhilos;
-
 struct Cola
 {
+	#define MAX 50
 	int arreglo[MAX];
-	int inicio = 0;
-	int final = -1;
-	int contadorElementos = 0;	
+	int inicio;
+	int final;
+	int contadorElementos;	
 };
-
-bool estaVacia()
-{
-	return contadorElementos == 0;
-}
-
-bool estaLlena()
-{
-	return contadorElementos == MAX;
-}
-
-void insertar(int hilo)
-{
-	if(!estaLlena())
-	{
-		if(final == MAX-1)
-		{
-			final = -1;
-		}
-
-		arreglo[++final] = hilo;
-		contadorElementos ++;
-	}
-}
-
-void quitar()
-{
-	int hilo = arreglo[inicio++];
-	if(inicio == MAX)
-	{
-		inicio = 0;
-	}
-
-	contadorElementos --;
-}
-
-//Termina la definición de la cola
 
 struct Semaforo
 {
@@ -60,6 +24,8 @@ struct Semaforo
 	int contador;
 	struct Cola Cola; 
 };
+
+//Termina la definición de la cola
 
 int main(int argc, char *argv[])
 {
@@ -72,6 +38,44 @@ int main(int argc, char *argv[])
 	//Especificamos las características del semáforo1 
 	Semaforo1.n = 2;
 	Semaforo1.contador = 0;
+	Semaforo1.Cola.inicio = 0;
+	Semaforo1.Cola.final = -1;
+	Semaforo1.Cola.contadorElementos = 0;
+
+	bool estaVacia()
+	{
+		return Semaforo1.Cola.contadorElementos == 0;
+	}	
+
+	bool estaLlena()
+	{
+		return Semaforo1.Cola.contadorElementos == MAX;
+	}
+
+	void insertar(int hilo)
+	{
+		if(!(estaLlena()))
+		{
+			if(Semaforo1.Cola.final == (Semaforo1.Cola.MAX)-1)
+			{
+				Semaforo1.Cola.final = -1;
+			}
+
+			Semaforo1.Cola.arreglo[++Semaforo1.Cola.final] = hilo;
+			Semaforo1.Cola.contadorElementos ++;
+		}
+	}
+
+	void quitar()
+	{
+		int hilo = Semaforo1.Cola.arreglo[Semaforo1.Cola.inicio++];
+		if(Semaforo1.Cola.inicio == MAX)
+		{
+			Semaforo1.Cola.inicio = 0;
+		}
+
+		Semaforo1.Cola.contadorElementos --;
+	}
 
 	printf("Ingresa el número de hilos que deseas lanzar: \n",argv[1]); //Recibimos por línea de comandos el número de hilos que se van a lanzar
 	scanf("%d", &nhilos);
